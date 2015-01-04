@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="JCT2015_RestService">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="JCT2015_RestService"/>
+        <property name="java-output-path" value="/JCT2015_RestService/build/classes"/>
+    </wb-module>
+</project-modules>
