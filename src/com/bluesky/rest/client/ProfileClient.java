@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response.Status;
 
 import com.bluesky.rest.cdi.interceptors.Audited;
 import com.bluesky.rest.model.Profile;
+import com.bluesky.rest.util.GsonMessageBodyHandler;
 
 /**
  * 
