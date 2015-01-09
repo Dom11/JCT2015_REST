@@ -32,13 +32,15 @@ public class ProfileClient implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final String REST_SERVICE_URL = "http://localhost:8080/JCT2015_RestService/profiles";
+	private static final String REST_SERVICE_URL = "http://localhost:8080/JCT2015_RestService/rest/profiles";
 	// http://localhost:8080/rest-web/rest/profiles
-	@Inject
+	//@Inject
 	Client client;
 
 	@Audited
 	public List<Profile> listProfiles() {
+		//TODO get the cdi injection working again
+		client = ClientBuilder.newClient().register(GsonMessageBodyHandler.class);
 
 		Response response = client.target(REST_SERVICE_URL).path("/list")
 				.request(MediaType.APPLICATION_JSON).get();
