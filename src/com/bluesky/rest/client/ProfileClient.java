@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response.Status;
 
 import com.bluesky.rest.cdi.interceptors.Audited;
 import com.bluesky.rest.model.Profile;
+import com.bluesky.rest.util.GsonMessageBodyHandler;
 
 /**
  * 
@@ -32,13 +33,15 @@ public class ProfileClient implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final String REST_SERVICE_URL = "http://localhost:8080/JCT2015_RestService/profiles";
+	private static final String REST_SERVICE_URL = "http://localhost:8080/JCT2015_RestService/rest/profiles";
 	// http://localhost:8080/rest-web/rest/profiles
-	@Inject
+	//@Inject
 	Client client;
 
 	@Audited
 	public List<Profile> listProfiles() {
+		//TODO get the cdi injection working again
+		client = ClientBuilder.newClient().register(GsonMessageBodyHandler.class);
 
 		Response response = client.target(REST_SERVICE_URL).path("/list")
 				.request(MediaType.APPLICATION_JSON).get();
