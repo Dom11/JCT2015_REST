@@ -35,7 +35,7 @@ public class ProfileClient implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static final String REST_SERVICE_URL = "http://localhost:8080/RestService/rest/profiles";
-	// http://localhost:8080/rest-web/rest/profiles
+
 	//@Inject
 	Client client;
 

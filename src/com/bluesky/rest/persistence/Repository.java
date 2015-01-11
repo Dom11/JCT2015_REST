@@ -27,14 +27,21 @@ public class Repository {
 	@PostConstruct
 	public void initialize() {
 		profiles = new ConcurrentHashMap<Integer, Profile>();
+		
+		
+		profiles.put(1, new Profile(1, "UCM DEV environment_1", "DEV"));
+		profiles.put(2, new Profile(2, "UCM UAT environment_2", "UAT"));
+		profiles.put(3, new Profile(3, "UCM PRO environment_3", "PRO"));
+		profiles.put(4, new Profile(4, "CCM DEV environment_4", "DEV"));
+		profiles.put(5, new Profile(5, "UCM SIT environment_5", "SIT"));
 
-		profiles.put(1, new Profile(1, "name1", "description1", "SIT"));
-		profiles.put(2, new Profile(2, "name2", "description2", "UAT"));
-		profiles.put(3, new Profile(3, "name3", "description3", "PROD"));
-		profiles.put(4, new Profile(4, "name4", "description4", "SIT"));
-		profiles.put(5, new Profile(5, "name5", "description5", "PROD"));
-		profiles.put(6, new Profile(6, "name6", "description6", "DEV"));
-		profiles.put(7, new Profile(7, "name7", "description7", "AUT"));
+//		profiles.put(1, new Profile(1, "name1", "description1", "SIT"));
+//		profiles.put(2, new Profile(2, "name2", "description2", "UAT"));
+//		profiles.put(3, new Profile(3, "name3", "description3", "PROD"));
+//		profiles.put(4, new Profile(4, "name4", "description4", "SIT"));
+//		profiles.put(5, new Profile(5, "name5", "description5", "PROD"));
+//		profiles.put(6, new Profile(6, "name6", "description6", "DEV"));
+//		profiles.put(7, new Profile(7, "name7", "description7", "AUT"));
 	}
 
 	public List<Profile> listProfiles() {
