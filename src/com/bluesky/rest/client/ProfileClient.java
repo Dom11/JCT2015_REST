@@ -3,9 +3,8 @@ package com.bluesky.rest.client;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
@@ -14,19 +13,14 @@ import javax.ws.rs.core.Response.Status;
 
 import com.bluesky.rest.cdi.interceptors.Audited;
 import com.bluesky.rest.model.Profile;
-import com.bluesky.rest.util.GsonMessageBodyHandler;
 
 
 /**
- * 
  * read
- * http://howtodoinjava.com/2013/08/03/jax-rs-2-0-resteasy-3-0-2-final-client
- * -api-example/
+ * http://howtodoinjava.com/2013/08/03/jax-rs-2-0-resteasy-3-0-2-final-client-api-example/
  * 
- * @author u24279
- * @version $Revision$, $Date$
+ * @author u24279, modified by drey
  */
-@Stateless
 public class ProfileClient implements Serializable {
 
 	/**
@@ -36,13 +30,11 @@ public class ProfileClient implements Serializable {
 
 	private static final String REST_SERVICE_URL = "http://localhost:8080/RestService/rest/profiles";
 
-	//@Inject
+	@Inject
 	Client client;
 
 	@Audited
 	public List<Profile> listProfiles() {
-		//TODO get the cdi injection working again
-		client = ClientBuilder.newClient().register(GsonMessageBodyHandler.class);
 
 		Response response = client.target(REST_SERVICE_URL).path("/list")
 				.request(MediaType.APPLICATION_JSON).get();
@@ -55,7 +47,6 @@ public class ProfileClient implements Serializable {
 			return response.readEntity(new GenericType<List<Profile>>() {
 			});
 		}
-
 	}
 
 	public Profile getProfile(int id) {
@@ -70,7 +61,6 @@ public class ProfileClient implements Serializable {
 		} else {
 			return response.readEntity(Profile.class);
 		}
-
 	}
 
 	public Profile createProfile(Profile profile) {
@@ -115,5 +105,4 @@ public class ProfileClient implements Serializable {
 			return response.readEntity(Profile.class);
 		}
 	}
-
 }
