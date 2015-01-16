@@ -11,6 +11,15 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
+/**
+ * CDI Qualifier
+ * unique identification of a class during CDI injection
+ * 
+ * @author Dominik
+ *
+ */
+
+
 @Qualifier
 @Retention(RUNTIME)
 @Target({ TYPE, METHOD, FIELD, PARAMETER })

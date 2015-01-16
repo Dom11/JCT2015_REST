@@ -2,6 +2,10 @@
 
 ### What is this repository for? ###
 
+To test rest services directly from the browser
+----------------------------------------------
+http://localhost:8080/RestService/rest/profiles/list
+
 * This repository should provide an inside perspective of the current development status
 * Version 1.0
 

@@ -19,13 +19,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.bluesky.rest.cdi.interceptors.Audited;
 import com.bluesky.rest.model.Profile;
 import com.bluesky.rest.persistence.Repository;
 
 @Stateless
 @Path("/profiles")
-@Audited
 public class ProfileResource {
 
 	@Inject
