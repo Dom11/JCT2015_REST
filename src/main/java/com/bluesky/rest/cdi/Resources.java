@@ -20,10 +20,5 @@ public class Resources {
 				.getDeclaringClass().getName());
 	}
 
-	@Produces
-	@AuditLogger
-	public Logger getAuditLogger(InjectionPoint injectionPoint) {
-		return LoggerFactory.getLogger("audit");
-	}
 
 }

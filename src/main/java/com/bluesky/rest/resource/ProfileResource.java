@@ -2,7 +2,6 @@ package com.bluesky.rest.resource;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,39 +18,47 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.bluesky.rest.model.Profile;
-import com.bluesky.rest.persistence.Repository;
+import com.bluesky.rest.data.dao.ProfileDao;
+import com.bluesky.rest.data.pdo.Profile;
 
-@Stateless
+//@Stateless
 @Path("/profiles")
 public class ProfileResource {
 
 	@Inject
-	Repository repository;
+	ProfileDao profileDao;
 
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/test")
+	public String showProfile() {	
+
+		return "test";
+	}
+	
+		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/list")
 	public Response listAllProfiles() {
-
+		
 		List<Profile> profiles = null;
 
 		try {
-			profiles = repository.listProfiles();
+			profiles = profileDao.findAll();
 
 		} catch (NotFoundException e) {
-			return Response.status(Status.NOT_FOUND).entity("record not found")
-					.build();
+			return Response.status(Status.NOT_FOUND).entity("record not found").build();
 		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR)
-					.entity(e.getMessage()).build();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
 		return Response.ok(new GenericEntity<List<Profile>>(profiles) {
 		}).build();
-
 	}
 
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
@@ -60,14 +67,12 @@ public class ProfileResource {
 		Profile profile = null;
 
 		try {
-			profile = repository.getProfile(id);
+			profile = profileDao.get(id);
 
 		} catch (NotFoundException e) {
-			return Response.status(Status.NOT_FOUND).entity("record not found")
-					.build();
+			return Response.status(Status.NOT_FOUND).entity("record not found").build();
 		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR)
-					.entity(e.getMessage()).build();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 		return Response.ok(profile).build();
 
@@ -81,10 +86,9 @@ public class ProfileResource {
 		Profile profilePersisted = null;
 
 		try {
-			profilePersisted = repository.createProfile(profile);
+			profilePersisted = profileDao.save(profile);
 		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR)
-					.entity(e.getMessage()).build();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
 		return Response.ok(profilePersisted).build();
@@ -99,10 +103,9 @@ public class ProfileResource {
 		Profile profilePersisted = null;
 
 		try {
-			profilePersisted = repository.updateProfile(profile);
+			profilePersisted = profileDao.save(profile);
 		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR)
-					.entity(e.getMessage()).build();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
 		return Response.ok(profilePersisted).build();
@@ -114,7 +117,7 @@ public class ProfileResource {
 	public Response deleteProfile(final @PathParam("id") int id) {
 
 		try {
-			repository.deleteProfile(id);
+			profileDao.delete(id);
 		} catch (Exception e) {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
