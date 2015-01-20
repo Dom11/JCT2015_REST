@@ -18,26 +18,26 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.bluesky.rest.data.dao.ProfileDao;
-import com.bluesky.rest.data.pdo.Profile;
+import com.bluesky.rest.data.dao.JbarDao;
+import com.bluesky.rest.data.pdo.Jbar;
 
-//@Stateless
-@Path("/profiles")
-public class ProfileResource {
+
+@Path("/jbar")
+public class JbarResource {
 
 	@Inject
-	ProfileDao profileDao;
-
+	JbarDao jbarDao;
+	
 		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/list")
-	public Response listAllProfiles() {
+	public Response listAllJbar() {
 		
-		List<Profile> profiles = null;
+		List<Jbar> jbars = null;
 
 		try {
-			profiles = profileDao.findAll();
+			jbars = jbarDao.findAll();
 
 		} catch (NotFoundException e) {
 			return Response.status(Status.NOT_FOUND).entity("record not found").build();
@@ -45,7 +45,7 @@ public class ProfileResource {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(new GenericEntity<List<Profile>>(profiles) {
+		return Response.ok(new GenericEntity<List<Jbar>>(jbars) {
 		}).build();
 	}
 
@@ -53,62 +53,62 @@ public class ProfileResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response getProfile(final @PathParam("id") int id) {
+	public Response getJbar(final @PathParam("id") int id) {
 
-		Profile profile = null;
+		Jbar jbar = null;
 
 		try {
-			profile = profileDao.get(id);
+			jbar = jbarDao.get(id);
 
 		} catch (NotFoundException e) {
 			return Response.status(Status.NOT_FOUND).entity("record not found").build();
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
-		return Response.ok(profile).build();
+		return Response.ok(jbar).build();
 
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createProfile(final Profile profile) {
+	public Response createJbar(final Jbar jbar) {
 
-		Profile profilePersisted = null;
+		Jbar jbarPersisted = null;
 
 		try {
-			profilePersisted = profileDao.save(profile);
+			jbarPersisted = jbarDao.save(jbar);
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(profilePersisted).build();
+		return Response.ok(jbarPersisted).build();
 
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateProfile(final Profile profile) {
+	public Response updateJbar(final Jbar jbar) {
 
-		Profile profilePersisted = null;
+		Jbar jbarPersisted = null;
 
 		try {
-			profilePersisted = profileDao.save(profile);
+			jbarPersisted = jbarDao.save(jbar);
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(profilePersisted).build();
+		return Response.ok(jbarPersisted).build();
 
 	}
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteProfile(final @PathParam("id") int id) {
+	public Response deleteJbar(final @PathParam("id") int id) {
 
 		try {
-			profileDao.delete(id);
+			jbarDao.delete(id);
 		} catch (Exception e) {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}

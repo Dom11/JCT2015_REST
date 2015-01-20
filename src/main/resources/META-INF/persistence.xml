@@ -7,6 +7,11 @@
 
 	<persistence-unit name="webapp">
 		<jta-data-source>java:jboss/datasources/RestServerDS</jta-data-source>
+		<class>com.bluesky.rest.data.pdo.Environment</class>
+		<class>com.bluesky.rest.data.pdo.Host</class>
+		<class>com.bluesky.rest.data.pdo.Jbar</class>
+		<class>com.bluesky.rest.data.pdo.Jira</class>
+		<class>com.bluesky.rest.data.pdo.Prefix</class>
 		<class>com.bluesky.rest.data.pdo.Profile</class>
 
 		<properties>

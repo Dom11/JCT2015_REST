@@ -2,7 +2,7 @@ package com.bluesky.rest.data.dao;
 
 import javax.ejb.Stateless;
 
-import com.bluesky.rest.data.pdo.Profile;
+import com.bluesky.rest.data.pdo.Jbar;
 
 
 /**
@@ -10,13 +10,13 @@ import com.bluesky.rest.data.pdo.Profile;
  * 
  */
 @Stateless
-public class ProfileDao extends GenericDao<Profile, Integer> {
+public class JbarDao extends GenericDao<Jbar, Integer> {
 
 	// ---- Fields
 
 	// ---- Constructors
-	public ProfileDao() {
-		super(Profile.class);
+	public JbarDao() {
+		super(Jbar.class);
 	}
 	
 	// ---- Methods

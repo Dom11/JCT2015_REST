@@ -1,6 +1,7 @@
 package com.bluesky.rest.data.pdo;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -9,6 +10,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name="profile")
 @NamedQuery(name="Profile.findAll", query="SELECT p FROM Profile p")
 public class Profile implements Serializable {
 	private static final long serialVersionUID = 1L;

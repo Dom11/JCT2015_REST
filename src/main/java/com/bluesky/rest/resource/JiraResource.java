@@ -18,26 +18,26 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.bluesky.rest.data.dao.ProfileDao;
-import com.bluesky.rest.data.pdo.Profile;
+import com.bluesky.rest.data.dao.JiraDao;
+import com.bluesky.rest.data.pdo.Jira;
 
-//@Stateless
-@Path("/profiles")
-public class ProfileResource {
+
+@Path("/jira")
+public class JiraResource {
 
 	@Inject
-	ProfileDao profileDao;
-
+	JiraDao jiraDao;
+	
 		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/list")
-	public Response listAllProfiles() {
+	public Response listAllJira() {
 		
-		List<Profile> profiles = null;
+		List<Jira> jiras = null;
 
 		try {
-			profiles = profileDao.findAll();
+			jiras = jiraDao.findAll();
 
 		} catch (NotFoundException e) {
 			return Response.status(Status.NOT_FOUND).entity("record not found").build();
@@ -45,7 +45,7 @@ public class ProfileResource {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(new GenericEntity<List<Profile>>(profiles) {
+		return Response.ok(new GenericEntity<List<Jira>>(jiras) {
 		}).build();
 	}
 
@@ -53,62 +53,62 @@ public class ProfileResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response getProfile(final @PathParam("id") int id) {
+	public Response getJira(final @PathParam("id") int id) {
 
-		Profile profile = null;
+		Jira jira = null;
 
 		try {
-			profile = profileDao.get(id);
+			jira = jiraDao.get(id);
 
 		} catch (NotFoundException e) {
 			return Response.status(Status.NOT_FOUND).entity("record not found").build();
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
-		return Response.ok(profile).build();
+		return Response.ok(jira).build();
 
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createProfile(final Profile profile) {
+	public Response createJira(final Jira jira) {
 
-		Profile profilePersisted = null;
+		Jira jiraPersisted = null;
 
 		try {
-			profilePersisted = profileDao.save(profile);
+			jiraPersisted = jiraDao.save(jira);
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(profilePersisted).build();
+		return Response.ok(jiraPersisted).build();
 
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateProfile(final Profile profile) {
+	public Response updateJira(final Jira jira) {
 
-		Profile profilePersisted = null;
+		Jira jiraPersisted = null;
 
 		try {
-			profilePersisted = profileDao.save(profile);
+			jiraPersisted = jiraDao.save(jira);
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(profilePersisted).build();
+		return Response.ok(jiraPersisted).build();
 
 	}
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteProfile(final @PathParam("id") int id) {
+	public Response deleteJira(final @PathParam("id") int id) {
 
 		try {
-			profileDao.delete(id);
+			jiraDao.delete(id);
 		} catch (Exception e) {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
