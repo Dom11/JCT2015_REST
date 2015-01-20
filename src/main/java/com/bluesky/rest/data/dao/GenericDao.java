@@ -3,7 +3,6 @@ package com.bluesky.rest.data.dao;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
@@ -11,8 +10,6 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.ejb.EntityManagerImpl;
-import org.slf4j.Logger;
-
 
 
 /**
@@ -24,10 +21,6 @@ import org.slf4j.Logger;
  * @param <I> key type to be generified.
  */
 public class GenericDao<T, I extends Serializable>  {
-
-	@Inject
-	protected Logger logger;
-
 
 	/**
 	 * The <code>EntityManager</code> used by this <code>AbstractDaoImpl</code>.
@@ -95,7 +88,7 @@ public class GenericDao<T, I extends Serializable>  {
 		try {
 			return entityManager.find(clazz, id);
 		} catch (Exception e) {
-			logger.warn("GenericDaoImpl:get : error fetching records", e);
+			System.out.println("GenericDaoImpl:get : error fetching records");
 			throw new DaoException(
 					"GenericDaoImpl:get : error fetching records", e);
 		}
@@ -112,7 +105,7 @@ public class GenericDao<T, I extends Serializable>  {
 		try {
 			entityManager.remove(get(id));
 		} catch (Exception e) {
-			logger.warn("GenericDaoImpl:delete : error removing record", e);
+			System.out.println("GenericDaoImpl:delete : error removing record");
 			throw new DaoException(
 					"GenericDaoImpl:delete : error removing record", e);
 		}
@@ -130,11 +123,11 @@ public class GenericDao<T, I extends Serializable>  {
 		try {
 			return entityManager.merge(t);
 		} catch (OptimisticLockException e) {
-			logger.warn("Record was changed by another user", e);
+			System.out.println("Record was changed by another user");
 			throw new DaoException(
 					"Record was changed by another user", e);
 		} catch (Exception e) {
-			logger.warn("GenericDaoImpl:save : error persisting record", e);
+			System.out.println("GenericDaoImpl:save : error persisting record");
 			throw new DaoException(
 					"GenericDaoImpl:save : error persisting record", e);
 		}
@@ -151,7 +144,7 @@ public class GenericDao<T, I extends Serializable>  {
 		try {
 			entityManager.flush();
 		} catch (Exception e) {
-			logger.warn("GenericDaoImpl:flush : error flushing state", e);
+			System.out.println("GenericDaoImpl:flush : error flushing state");
 			throw new DaoException(
 					"GenericDaoImpl:flush : error flushing state", e);
 		}
@@ -176,7 +169,7 @@ public class GenericDao<T, I extends Serializable>  {
 			return crit.list();	
 			
 		} catch (Exception e) {
-			logger.warn("GenericDaoImpl:findAll : error retrieving records", e);
+			System.out.println("GenericDaoImpl:findAll : error retrieving records");
 			throw new DaoException(
 					"GenericDaoImpl:findAll : error retieving records", e);
 		}
@@ -193,9 +186,8 @@ public class GenericDao<T, I extends Serializable>  {
 		try {
 			entityManager.refresh(t);
 		} catch (Exception e) {
-			logger.warn(
-					"GenericDaoImpl:refresh : error refreshing state of object",
-					e);
+			System.out.println(
+					"GenericDaoImpl:refresh : error refreshing state of object");
 			throw new DaoException(
 					"GenericDaoImpl:refresh : error refreshing state of object",
 					e);

@@ -1,5 +1,7 @@
 package com.bluesky.rest.data.dao;
 
+import javax.ejb.Stateless;
+
 import com.bluesky.rest.data.pdo.Profile;
 
 
@@ -8,7 +10,7 @@ import com.bluesky.rest.data.pdo.Profile;
  * 
  * @author as
  */
-//@Stateless
+@Stateless
 public class ProfileDao extends GenericDao<Profile,Integer> {
 
 	// ---- Fields
