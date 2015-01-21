@@ -18,26 +18,26 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.bluesky.rest.data.dao.ProfileDao;
-import com.bluesky.rest.data.pdo.Profile;
+import com.bluesky.rest.data.dao.EnvironmentDao;
+import com.bluesky.rest.data.pdo.Environment;
 
-//@Stateless
-@Path("/profiles")
-public class ProfileResource {
+
+@Path("/environment")
+public class EnvironmentResource {
 
 	@Inject
-	ProfileDao profileDao;
-
+	EnvironmentDao environmentDao;
+	
 		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/list")
-	public Response listAllProfiles() {
+	public Response listAllEnvironments() {
 		
-		List<Profile> profiles = null;
+		List<Environment> environments = null;
 
 		try {
-			profiles = profileDao.findAll();
+			environments = environmentDao.findAll();
 
 		} catch (NotFoundException e) {
 			return Response.status(Status.NOT_FOUND).entity("record not found").build();
@@ -45,7 +45,7 @@ public class ProfileResource {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(new GenericEntity<List<Profile>>(profiles) {
+		return Response.ok(new GenericEntity<List<Environment>>(environments) {
 		}).build();
 	}
 
@@ -53,62 +53,62 @@ public class ProfileResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response getProfile(final @PathParam("id") int id) {
+	public Response getEnvironment(final @PathParam("id") int id) {
 
-		Profile profile = null;
+		Environment environment = null;
 
 		try {
-			profile = profileDao.get(id);
+			environment = environmentDao.get(id);
 
 		} catch (NotFoundException e) {
 			return Response.status(Status.NOT_FOUND).entity("record not found").build();
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
-		return Response.ok(profile).build();
+		return Response.ok(environment).build();
 
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createProfile(final Profile profile) {
+	public Response createEnvironment(final Environment environment) {
 
-		Profile profilePersisted = null;
+		Environment environmentPersisted = null;
 
 		try {
-			profilePersisted = profileDao.save(profile);
+			environmentPersisted = environmentDao.save(environment);
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(profilePersisted).build();
+		return Response.ok(environmentPersisted).build();
 
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateProfile(final Profile profile) {
+	public Response updateEnvironment(final Environment environment) {
 
-		Profile profilePersisted = null;
+		Environment environmentPersisted = null;
 
 		try {
-			profilePersisted = profileDao.save(profile);
+			environmentPersisted = environmentDao.save(environment);
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(profilePersisted).build();
+		return Response.ok(environmentPersisted).build();
 
 	}
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteProfile(final @PathParam("id") int id) {
+	public Response deleteEnvironment(final @PathParam("id") int id) {
 
 		try {
-			profileDao.delete(id);
+			environmentDao.delete(id);
 		} catch (Exception e) {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}

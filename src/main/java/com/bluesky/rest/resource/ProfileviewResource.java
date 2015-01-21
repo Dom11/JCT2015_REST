@@ -18,26 +18,26 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.bluesky.rest.data.dao.ProfileDao;
-import com.bluesky.rest.data.pdo.Profile;
+import com.bluesky.rest.data.dao.ProfileviewDao;
+import com.bluesky.rest.data.pdo.Profileview;
 
-//@Stateless
-@Path("/profiles")
-public class ProfileResource {
+
+@Path("/profileview")
+public class ProfileviewResource {
 
 	@Inject
-	ProfileDao profileDao;
+	ProfileviewDao profileviewDao;
 
 		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/list")
-	public Response listAllProfiles() {
+	public Response listAllProfileviews() {
 		
-		List<Profile> profiles = null;
+		List<Profileview> profileviews = null;
 
 		try {
-			profiles = profileDao.findAll();
+			profileviews = profileviewDao.findAll();
 
 		} catch (NotFoundException e) {
 			return Response.status(Status.NOT_FOUND).entity("record not found").build();
@@ -45,7 +45,7 @@ public class ProfileResource {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(new GenericEntity<List<Profile>>(profiles) {
+		return Response.ok(new GenericEntity<List<Profileview>>(profileviews) {
 		}).build();
 	}
 
@@ -53,62 +53,62 @@ public class ProfileResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response getProfile(final @PathParam("id") int id) {
+	public Response getProfileview(final @PathParam("id") int id) {
 
-		Profile profile = null;
+		Profileview profileview = null;
 
 		try {
-			profile = profileDao.get(id);
+			profileview = profileviewDao.get(id);
 
 		} catch (NotFoundException e) {
 			return Response.status(Status.NOT_FOUND).entity("record not found").build();
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
-		return Response.ok(profile).build();
+		return Response.ok(profileview).build();
 
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createProfile(final Profile profile) {
+	public Response createProfileview(final Profileview profileview) {
 
-		Profile profilePersisted = null;
+		Profileview profileviewPersisted = null;
 
 		try {
-			profilePersisted = profileDao.save(profile);
+			profileviewPersisted = profileviewDao.save(profileview);
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(profilePersisted).build();
+		return Response.ok(profileviewPersisted).build();
 
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateProfile(final Profile profile) {
+	public Response updateProfileview(final Profileview profileview) {
 
-		Profile profilePersisted = null;
+		Profileview profileviewPersisted = null;
 
 		try {
-			profilePersisted = profileDao.save(profile);
+			profileviewPersisted = profileviewDao.save(profileview);
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(profilePersisted).build();
+		return Response.ok(profileviewPersisted).build();
 
 	}
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteProfile(final @PathParam("id") int id) {
+	public Response deleteProfileview(final @PathParam("id") int id) {
 
 		try {
-			profileDao.delete(id);
+			profileviewDao.delete(id);
 		} catch (Exception e) {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}

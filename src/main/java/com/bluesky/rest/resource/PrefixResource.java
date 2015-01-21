@@ -18,26 +18,26 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.bluesky.rest.data.dao.ProfileDao;
-import com.bluesky.rest.data.pdo.Profile;
+import com.bluesky.rest.data.dao.PrefixDao;
+import com.bluesky.rest.data.pdo.Prefix;
 
-//@Stateless
-@Path("/profiles")
-public class ProfileResource {
+
+@Path("/prefix")
+public class PrefixResource {
 
 	@Inject
-	ProfileDao profileDao;
+	PrefixDao prefixDao;
 
 		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/list")
-	public Response listAllProfiles() {
+	public Response listAllPrefixes() {
 		
-		List<Profile> profiles = null;
+		List<Prefix> prefixes = null;
 
 		try {
-			profiles = profileDao.findAll();
+			prefixes = prefixDao.findAll();
 
 		} catch (NotFoundException e) {
 			return Response.status(Status.NOT_FOUND).entity("record not found").build();
@@ -45,7 +45,7 @@ public class ProfileResource {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(new GenericEntity<List<Profile>>(profiles) {
+		return Response.ok(new GenericEntity<List<Prefix>>(prefixes) {
 		}).build();
 	}
 
@@ -53,62 +53,62 @@ public class ProfileResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response getProfile(final @PathParam("id") int id) {
+	public Response getPrefix(final @PathParam("id") int id) {
 
-		Profile profile = null;
+		Prefix prefix = null;
 
 		try {
-			profile = profileDao.get(id);
+			prefix = prefixDao.get(id);
 
 		} catch (NotFoundException e) {
 			return Response.status(Status.NOT_FOUND).entity("record not found").build();
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
-		return Response.ok(profile).build();
+		return Response.ok(prefix).build();
 
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createProfile(final Profile profile) {
+	public Response createPrefix(final Prefix prefix) {
 
-		Profile profilePersisted = null;
+		Prefix prefixPersisted = null;
 
 		try {
-			profilePersisted = profileDao.save(profile);
+			prefixPersisted = prefixDao.save(prefix);
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(profilePersisted).build();
+		return Response.ok(prefixPersisted).build();
 
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateProfile(final Profile profile) {
+	public Response updatePrefix(final Prefix prefix) {
 
-		Profile profilePersisted = null;
+		Prefix prefixPersisted = null;
 
 		try {
-			profilePersisted = profileDao.save(profile);
+			prefixPersisted = prefixDao.save(prefix);
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(profilePersisted).build();
+		return Response.ok(prefixPersisted).build();
 
 	}
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteProfile(final @PathParam("id") int id) {
+	public Response deletePrefix(final @PathParam("id") int id) {
 
 		try {
-			profileDao.delete(id);
+			prefixDao.delete(id);
 		} catch (Exception e) {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}

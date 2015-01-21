@@ -18,26 +18,26 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.bluesky.rest.data.dao.ProfileDao;
-import com.bluesky.rest.data.pdo.Profile;
+import com.bluesky.rest.data.dao.HostDao;
+import com.bluesky.rest.data.pdo.Host;
 
-//@Stateless
-@Path("/profiles")
-public class ProfileResource {
+
+@Path("/host")
+public class HostResource {
 
 	@Inject
-	ProfileDao profileDao;
-
+	HostDao hostDao;
+	
 		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/list")
-	public Response listAllProfiles() {
+	public Response listAllHosts() {
 		
-		List<Profile> profiles = null;
+		List<Host> hosts = null;
 
 		try {
-			profiles = profileDao.findAll();
+			hosts = hostDao.findAll();
 
 		} catch (NotFoundException e) {
 			return Response.status(Status.NOT_FOUND).entity("record not found").build();
@@ -45,7 +45,7 @@ public class ProfileResource {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(new GenericEntity<List<Profile>>(profiles) {
+		return Response.ok(new GenericEntity<List<Host>>(hosts) {
 		}).build();
 	}
 
@@ -53,62 +53,62 @@ public class ProfileResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response getProfile(final @PathParam("id") int id) {
+	public Response getHost(final @PathParam("id") int id) {
 
-		Profile profile = null;
+		Host host = null;
 
 		try {
-			profile = profileDao.get(id);
+			host = hostDao.get(id);
 
 		} catch (NotFoundException e) {
 			return Response.status(Status.NOT_FOUND).entity("record not found").build();
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
-		return Response.ok(profile).build();
+		return Response.ok(host).build();
 
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createProfile(final Profile profile) {
+	public Response createHost(final Host host) {
 
-		Profile profilePersisted = null;
+		Host hostPersisted = null;
 
 		try {
-			profilePersisted = profileDao.save(profile);
+			hostPersisted = hostDao.save(host);
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(profilePersisted).build();
+		return Response.ok(hostPersisted).build();
 
 	}
 
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateProfile(final Profile profile) {
+	public Response updateHost(final Host host) {
 
-		Profile profilePersisted = null;
+		Host hostPersisted = null;
 
 		try {
-			profilePersisted = profileDao.save(profile);
+			hostPersisted = hostDao.save(host);
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 
-		return Response.ok(profilePersisted).build();
+		return Response.ok(hostPersisted).build();
 
 	}
 
 	@DELETE
 	@Path("/{id}")
-	public Response deleteProfile(final @PathParam("id") int id) {
+	public Response deleteHost(final @PathParam("id") int id) {
 
 		try {
-			profileDao.delete(id);
+			hostDao.delete(id);
 		} catch (Exception e) {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
