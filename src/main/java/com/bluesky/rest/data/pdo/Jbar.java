@@ -1,6 +1,7 @@
 package com.bluesky.rest.data.pdo;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -10,18 +11,29 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="jbar")
-@NamedQuery(name="Jbar.findAll", query="SELECT j FROM Jbar j")
 public class Jbar implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Version
+	private int version;
+	
 	@Id
-	@Column(name="jbar_id", unique=true, nullable=false)
+	@Column(name="jbar_id")
 	private int jbarId;
 
-	@Column(nullable=false, length=5)
+	@Column(name="jbarName")
 	private String jbarName;
 
+	
 	public Jbar() {
+	}
+	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	public int getJbarId() {
@@ -39,5 +51,4 @@ public class Jbar implements Serializable {
 	public void setJbarName(String jbarName) {
 		this.jbarName = jbarName;
 	}
-
 }

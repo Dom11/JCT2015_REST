@@ -1,7 +1,12 @@
 package com.bluesky.rest.data.pdo;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Version;
 
 
 /**
@@ -10,26 +15,33 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="environment")
-@NamedQuery(name="Environment.findAll", query="SELECT e FROM Environment e")
 public class Environment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Version
+	private int version;
+	
 	@Id
-	@Column(name="environment_id", unique=true, nullable=false)
-	private int environmentId;
+	@Column(name="environment_id")
+	int environmentId;
+	
+	@Column(name="environmentName")
+	String environmentName;
 
-	@Column(nullable=false, length=5)
-	private String environmentName;
-
+	
 	public Environment() {
+	}
+	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	public int getEnvironmentId() {
 		return this.environmentId;
-	}
-
-	public void setEnvironmentId(int environmentId) {
-		this.environmentId = environmentId;
 	}
 
 	public String getEnvironmentName() {
@@ -39,5 +51,4 @@ public class Environment implements Serializable {
 	public void setEnvironmentName(String environmentName) {
 		this.environmentName = environmentName;
 	}
-
 }

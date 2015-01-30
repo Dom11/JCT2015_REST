@@ -1,6 +1,7 @@
 package com.bluesky.rest.data.pdo;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -10,18 +11,29 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="prefix")
-@NamedQuery(name="Prefix.findAll", query="SELECT p FROM Prefix p")
 public class Prefix implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Version
+	private int version;
+	
 	@Id
-	@Column(name="prefix_id", unique=true, nullable=false)
+	@Column(name="prefix_id")
 	private int prefixId;
 
-	@Column(nullable=false, length=5)
+	@Column(name="prefixName")
 	private String prefixName;
 
+	
 	public Prefix() {
+	}
+	
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 	public int getPrefixId() {
@@ -39,5 +51,4 @@ public class Prefix implements Serializable {
 	public void setPrefixName(String prefixName) {
 		this.prefixName = prefixName;
 	}
-
 }
