@@ -44,7 +44,6 @@ public class ProfileResource {
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
-
 		return Response.ok(new GenericEntity<List<Profile>>(profiles) {
 		}).build();
 	}
@@ -66,9 +65,9 @@ public class ProfileResource {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
 		return Response.ok(profile).build();
-
 	}
 
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -81,11 +80,10 @@ public class ProfileResource {
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
-
 		return Response.ok(profilePersisted).build();
-
 	}
 
+	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -98,11 +96,10 @@ public class ProfileResource {
 		} catch (Exception e) {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
 		}
-
 		return Response.ok(profilePersisted).build();
-
 	}
 
+	
 	@DELETE
 	@Path("/{id}")
 	public Response deleteProfile(final @PathParam("id") int id) {
@@ -113,7 +110,5 @@ public class ProfileResource {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
 		return Response.status(Status.GONE).build();
-
 	}
-
 }

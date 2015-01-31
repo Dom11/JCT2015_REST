@@ -1,6 +1,7 @@
 package com.bluesky.rest.data.pdo;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -10,17 +11,21 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="host")
-@NamedQuery(name="Host.findAll", query="SELECT h FROM Host h")
 public class Host implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="host_id", unique=true, nullable=false)
+	@Column(name="host_id")
 	private int hostId;
 
-	@Column(nullable=false, length=20)
+	@Column(name="hostName")
 	private String hostName;
+	
+	@Version
+	@Column(name="version")
+	private Integer version;
 
+	
 	public Host() {
 	}
 
@@ -40,4 +45,11 @@ public class Host implements Serializable {
 		this.hostName = hostName;
 	}
 
+	public Integer getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 }

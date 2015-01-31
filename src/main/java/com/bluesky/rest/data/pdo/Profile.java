@@ -11,7 +11,6 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="profile")
-@NamedQuery(name="Profile.findAll", query="SELECT p FROM Profile p")
 public class Profile implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,14 +33,22 @@ public class Profile implements Serializable {
 	@Column(name="prefix_id")
 	private int prefixId;
 
+	@Column(name="profileComponent")
 	private String profileComponent;
+	
+	@Column(name="profileDescription")
 	private String profileDescription;
+	
+	@Column(name="profileDnsName")
 	private String profileDnsName;
-
+	
+	@Version
+	@Column(name="version")
+	private Integer version;
+	
 	
 	public Profile() {
 	}
-
 	
 	public int getProfileId() {
 		return this.profileId;
@@ -115,4 +122,11 @@ public class Profile implements Serializable {
 		this.profileDnsName = profileDnsName;
 	}
 
+	public Integer getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 }

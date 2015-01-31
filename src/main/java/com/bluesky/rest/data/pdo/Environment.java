@@ -10,26 +10,26 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="environment")
-@NamedQuery(name="Environment.findAll", query="SELECT e FROM Environment e")
 public class Environment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="environment_id", unique=true, nullable=false)
+	@Column(name="environment_id")
 	private int environmentId;
 
-	@Column(nullable=false, length=5)
+	@Column(name="environmentName")
 	private String environmentName;
 
+	@Version
+	@Column(name="version")
+	private Integer version;
+
+	
 	public Environment() {
 	}
-
+	
 	public int getEnvironmentId() {
 		return this.environmentId;
-	}
-
-	public void setEnvironmentId(int environmentId) {
-		this.environmentId = environmentId;
 	}
 
 	public String getEnvironmentName() {
@@ -40,4 +40,11 @@ public class Environment implements Serializable {
 		this.environmentName = environmentName;
 	}
 
+	public Integer getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 }

@@ -45,6 +45,7 @@ public class Profileview implements Serializable {
 	@Column(length=17)
 	private String profileName;
 
+	
 	public Profileview() {
 	}
 
@@ -127,5 +128,4 @@ public class Profileview implements Serializable {
 	public void setProfileName(String profileName) {
 		this.profileName = profileName;
 	}
-
 }

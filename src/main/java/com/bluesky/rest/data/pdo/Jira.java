@@ -1,6 +1,7 @@
 package com.bluesky.rest.data.pdo;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -10,20 +11,23 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="jira")
-@NamedQuery(name="Jira.findAll", query="SELECT j FROM Jira j")
 public class Jira implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="jira_id", unique=true, nullable=false)
+	@Column(name="jira_id")
 	private int jiraId;
 
-	@Column(nullable=false, length=45)
+	@Column(name="jiraProjectKey")
 	private String jiraProjectKey;
 
+	@Version
+	@Column(name="version")
+	private Integer version;
+	
 	public Jira() {
 	}
-
+	
 	public int getJiraId() {
 		return this.jiraId;
 	}
@@ -40,4 +44,11 @@ public class Jira implements Serializable {
 		this.jiraProjectKey = jiraProjectKey;
 	}
 
+	public Integer getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 }
