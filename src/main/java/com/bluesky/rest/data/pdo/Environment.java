@@ -1,12 +1,7 @@
 package com.bluesky.rest.data.pdo;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.persistence.*;
 
 
 /**
@@ -18,28 +13,21 @@ import javax.persistence.Version;
 public class Environment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Version
-	private int version;
-	
 	@Id
 	@Column(name="environment_id")
-	int environmentId;
-	
+	private int environmentId;
+
 	@Column(name="environmentName")
-	String environmentName;
+	private String environmentName;
+
+	@Version
+	@Column(name="version")
+	private Integer version;
 
 	
 	public Environment() {
 	}
 	
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
 	public int getEnvironmentId() {
 		return this.environmentId;
 	}
@@ -50,5 +38,13 @@ public class Environment implements Serializable {
 
 	public void setEnvironmentName(String environmentName) {
 		this.environmentName = environmentName;
+	}
+
+	public Integer getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 }

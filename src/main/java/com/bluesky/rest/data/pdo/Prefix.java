@@ -14,28 +14,21 @@ import javax.persistence.*;
 public class Prefix implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Version
-	private int version;
-	
 	@Id
 	@Column(name="prefix_id")
 	private int prefixId;
 
 	@Column(name="prefixName")
 	private String prefixName;
-
+	
+	@Version
+	@Column(name="version")
+	private Integer version;
+	
 	
 	public Prefix() {
 	}
 	
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
 	public int getPrefixId() {
 		return this.prefixId;
 	}
@@ -50,5 +43,13 @@ public class Prefix implements Serializable {
 
 	public void setPrefixName(String prefixName) {
 		this.prefixName = prefixName;
+	}
+
+	public Integer getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 }

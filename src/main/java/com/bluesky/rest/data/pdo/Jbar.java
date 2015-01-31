@@ -14,28 +14,21 @@ import javax.persistence.*;
 public class Jbar implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Version
-	private int version;
-	
 	@Id
 	@Column(name="jbar_id")
 	private int jbarId;
 
 	@Column(name="jbarName")
 	private String jbarName;
+	
+	@Version
+	@Column(name="version")
+	private Integer version;
 
 	
 	public Jbar() {
 	}
 	
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
 	public int getJbarId() {
 		return this.jbarId;
 	}
@@ -50,5 +43,13 @@ public class Jbar implements Serializable {
 
 	public void setJbarName(String jbarName) {
 		this.jbarName = jbarName;
+	}
+
+	public Integer getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 }

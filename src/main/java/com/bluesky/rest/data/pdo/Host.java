@@ -14,26 +14,19 @@ import javax.persistence.*;
 public class Host implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Version
-	private int version;
-	
 	@Id
 	@Column(name="host_id")
 	private int hostId;
 
 	@Column(name="hostName")
 	private String hostName;
+	
+	@Version
+	@Column(name="version")
+	private Integer version;
 
 	
 	public Host() {
-	}
-	
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
 	}
 
 	public int getHostId() {
@@ -50,5 +43,13 @@ public class Host implements Serializable {
 
 	public void setHostName(String hostName) {
 		this.hostName = hostName;
+	}
+
+	public Integer getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 }

@@ -14,9 +14,6 @@ import javax.persistence.*;
 public class Profile implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Version
-	private int version;
-	
 	@Id
 	@Column(name="profile_id")
 	private int profileId;
@@ -35,7 +32,7 @@ public class Profile implements Serializable {
 
 	@Column(name="prefix_id")
 	private int prefixId;
-	
+
 	@Column(name="profileComponent")
 	private String profileComponent;
 	
@@ -44,17 +41,13 @@ public class Profile implements Serializable {
 	
 	@Column(name="profileDnsName")
 	private String profileDnsName;
-
+	
+	@Version
+	@Column(name="version")
+	private Integer version;
+	
 	
 	public Profile() {
-	}
-	
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
 	}
 	
 	public int getProfileId() {
@@ -127,5 +120,13 @@ public class Profile implements Serializable {
 
 	public void setProfileDnsName(String profileDnsName) {
 		this.profileDnsName = profileDnsName;
+	}
+
+	public Integer getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 }

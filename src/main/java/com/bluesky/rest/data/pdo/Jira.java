@@ -14,9 +14,6 @@ import javax.persistence.*;
 public class Jira implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Version
-	private int version;
-	
 	@Id
 	@Column(name="jira_id")
 	private int jiraId;
@@ -24,18 +21,13 @@ public class Jira implements Serializable {
 	@Column(name="jiraProjectKey")
 	private String jiraProjectKey;
 
+	@Version
+	@Column(name="version")
+	private Integer version;
 	
 	public Jira() {
 	}
 	
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
-	}
-
 	public int getJiraId() {
 		return this.jiraId;
 	}
@@ -50,5 +42,13 @@ public class Jira implements Serializable {
 
 	public void setJiraProjectKey(String jiraProjectKey) {
 		this.jiraProjectKey = jiraProjectKey;
+	}
+
+	public Integer getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 }
