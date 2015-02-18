@@ -32,6 +32,9 @@ public class Profile implements Serializable {
 
 	@Column(name="prefix_id")
 	private int prefixId;
+	
+	@Column(name="domain_id")
+	private int domainId;
 
 	@Column(name="profileComponent")
 	private String profileComponent;
@@ -96,6 +99,14 @@ public class Profile implements Serializable {
 
 	public void setPrefixId(int prefixId) {
 		this.prefixId = prefixId;
+	}
+	
+	public int getDomainId() {
+		return this.domainId;
+	}
+
+	public void setDomainId(int domainId) {
+		this.domainId = domainId;
 	}
 
 	public String getProfileComponent() {

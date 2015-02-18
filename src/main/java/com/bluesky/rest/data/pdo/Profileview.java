@@ -25,9 +25,12 @@ public class Profileview implements Serializable {
 
 	@Column(nullable=false, length=45)
 	private String jiraProjectKey;
-
+	
 	@Column(nullable=false, length=5)
 	private String prefixName;
+	
+	@Column(nullable=false, length=45)
+	private String domainName;
 	
 	@Id
 	@Column(name="profile_id", nullable=false)
@@ -72,6 +75,7 @@ public class Profileview implements Serializable {
 	public void setJbarName(String jbarName) {
 		this.jbarName = jbarName;
 	}
+	
 
 	public String getJiraProjectKey() {
 		return this.jiraProjectKey;
@@ -87,6 +91,14 @@ public class Profileview implements Serializable {
 
 	public void setPrefixName(String prefixName) {
 		this.prefixName = prefixName;
+	}
+	
+	public String getDomainName() {
+		return this.domainName;
+	}
+
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
 	}
 
 	public int getProfileId() {

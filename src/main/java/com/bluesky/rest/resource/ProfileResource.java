@@ -87,6 +87,7 @@ public class ProfileResource {
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
+//	@Path("/{id}")
 	public Response updateProfile(final Profile profile) {
 
 		Profile profilePersisted = null;
@@ -106,7 +107,9 @@ public class ProfileResource {
 
 		try {
 			profileDao.delete(id);
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
 		return Response.status(Status.GONE).build();
