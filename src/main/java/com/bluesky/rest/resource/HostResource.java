@@ -6,13 +6,11 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -23,28 +21,25 @@ import com.bluesky.rest.data.pdo.Host;
 
 
 @Path("/host")
-public class HostResource {
+public class HostResource extends AbstractResource {
 
 	@Inject
 	HostDao hostDao;
+
 	
-		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/list")
 	public Response listAllHosts() {
-		
+
 		List<Host> hosts = null;
 
 		try {
 			hosts = hostDao.findAll();
-
-		} catch (NotFoundException e) {
-			return Response.status(Status.NOT_FOUND).entity("record not found").build();
-		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+			
+		} catch (Exception exception) {
+			return handleException(exception);
 		}
-
 		return Response.ok(new GenericEntity<List<Host>>(hosts) {
 		}).build();
 	}
@@ -60,15 +55,13 @@ public class HostResource {
 		try {
 			host = hostDao.get(id);
 
-		} catch (NotFoundException e) {
-			return Response.status(Status.NOT_FOUND).entity("record not found").build();
-		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+		} catch (Exception exception) {
+			return handleException(exception);
 		}
 		return Response.ok(host).build();
-
 	}
 
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -78,14 +71,14 @@ public class HostResource {
 
 		try {
 			hostPersisted = hostDao.save(host);
-		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+			
+		} catch (Exception exception) {
+			return handleException(exception);
 		}
-
 		return Response.ok(hostPersisted).build();
-
 	}
 
+	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -95,25 +88,24 @@ public class HostResource {
 
 		try {
 			hostPersisted = hostDao.save(host);
-		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+			
+		} catch (Exception exception) {
+			return handleException(exception);
 		}
-
 		return Response.ok(hostPersisted).build();
-
 	}
 
+	
 	@DELETE
 	@Path("/{id}")
 	public Response deleteHost(final @PathParam("id") int id) {
 
 		try {
 			hostDao.delete(id);
-		} catch (Exception e) {
-			throw new WebApplicationException(Response.Status.NOT_FOUND);
+			
+		} catch (Exception exception) {
+			return handleException(exception);
 		}
 		return Response.status(Status.GONE).build();
-
 	}
-
 }

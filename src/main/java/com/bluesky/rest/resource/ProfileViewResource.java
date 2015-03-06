@@ -16,31 +16,31 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.bluesky.rest.data.dao.DomainDao;
-import com.bluesky.rest.data.pdo.Domain;
+import com.bluesky.rest.data.dao.ProfileViewDao;
+import com.bluesky.rest.data.pdo.ProfileView;
 
 
-@Path("/domain")
-public class DomainResource extends AbstractResource {
+@Path("/profileView")
+public class ProfileViewResource extends AbstractResource {
 
 	@Inject
-	DomainDao domainDao;
-	
+	ProfileViewDao profileViewDao;
 
+		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/list")
-	public Response listAllDomains() {
-
-		List<Domain> domains = null;
+	public Response listAllProfileviews() {
+		
+		List<ProfileView> profileViews = null;
 
 		try {
-			domains = domainDao.findAll();
+			profileViews = profileViewDao.findAll();
 
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(new GenericEntity<List<Domain>>(domains) {
+		return Response.ok(new GenericEntity<List<ProfileView>>(profileViews) {
 		}).build();
 	}
 
@@ -48,60 +48,60 @@ public class DomainResource extends AbstractResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response getDomain(final @PathParam("id") int id) {
+	public Response getProfileview(final @PathParam("id") int id) {
 
-		Domain domain = null;
+		ProfileView profileView = null;
 
 		try {
-			domain = domainDao.get(id);
+			profileView = profileViewDao.get(id);
 
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(domain).build();
+		return Response.ok(profileView).build();
 	}
 
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createDomain(final Domain domain) {
+	public Response createProfileview(final ProfileView profileview) {
 
-		Domain domainPersisted = null;
+		ProfileView profileviewPersisted = null;
 
 		try {
-			domainPersisted = domainDao.save(domain);
+			profileviewPersisted = profileViewDao.save(profileview);
+			
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(domainPersisted).build();
+		return Response.ok(profileviewPersisted).build();
 	}
 
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateDomain(final Domain domain) {
+	public Response updateProfileview(final ProfileView profileview) {
 
-		Domain domainPersisted = null;
+		ProfileView profileviewPersisted = null;
 
 		try {
-			domainPersisted = domainDao.save(domain);
+			profileviewPersisted = profileViewDao.save(profileview);
 			
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(domainPersisted).build();
+		return Response.ok(profileviewPersisted).build();
 	}
 
 	
 	@DELETE
 	@Path("/{id}")
-	public Response deleteDomain(final @PathParam("id") int id) {
+	public Response deleteProfileview(final @PathParam("id") int id) {
 
 		try {
-			domainDao.delete(id);
-			
+			profileViewDao.delete(id);
 		} catch (Exception exception) {
 			return handleException(exception);
 		}

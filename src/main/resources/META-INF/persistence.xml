@@ -14,7 +14,7 @@
 		<class>com.bluesky.rest.data.pdo.Jira</class>
 		<class>com.bluesky.rest.data.pdo.Prefix</class>
 		<class>com.bluesky.rest.data.pdo.Profile</class>
-		<class>com.bluesky.rest.data.pdo.Profileview</class>
+		<class>com.bluesky.rest.data.pdo.ProfileView</class>
 
 		<properties>
 			<!-- Properties for Hibernate -->

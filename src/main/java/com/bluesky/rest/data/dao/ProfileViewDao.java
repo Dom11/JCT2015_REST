@@ -2,7 +2,7 @@ package com.bluesky.rest.data.dao;
 
 import javax.ejb.Stateless;
 
-import com.bluesky.rest.data.pdo.Profileview;
+import com.bluesky.rest.data.pdo.ProfileView;
 
 
 /**
@@ -10,13 +10,13 @@ import com.bluesky.rest.data.pdo.Profileview;
  * 
  */
 @Stateless
-public class ProfileviewDao extends GenericDao<Profileview,Integer> {
+public class ProfileViewDao extends GenericDao<ProfileView,Integer> {
 
 	// ---- Fields
 
 	// ---- Constructors
-	public ProfileviewDao() {
-		super(Profileview.class);
+	public ProfileViewDao() {
+		super(ProfileView.class);
 	}
 
 	// ---- Methods

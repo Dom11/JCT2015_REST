@@ -45,6 +45,9 @@ public class Profile implements Serializable {
 	@Column(name="profileDnsName")
 	private String profileDnsName;
 	
+	@Column(name="profileStatus")
+	private boolean profileStatus;
+	
 	@Version
 	@Column(name="version")
 	private Integer version;
@@ -131,6 +134,14 @@ public class Profile implements Serializable {
 
 	public void setProfileDnsName(String profileDnsName) {
 		this.profileDnsName = profileDnsName;
+	}
+	
+	public boolean getProfileStatus() {
+		return this.profileStatus;
+	}
+
+	public void setProfileStatus(boolean profileStatus) {
+		this.profileStatus = profileStatus;
 	}
 
 	public Integer getVersion() {

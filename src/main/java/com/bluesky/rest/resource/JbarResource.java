@@ -6,13 +6,11 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -23,7 +21,7 @@ import com.bluesky.rest.data.pdo.Jbar;
 
 
 @Path("/jbar")
-public class JbarResource {
+public class JbarResource extends AbstractResource {
 
 	@Inject
 	JbarDao jbarDao;
@@ -39,12 +37,9 @@ public class JbarResource {
 		try {
 			jbars = jbarDao.findAll();
 
-		} catch (NotFoundException e) {
-			return Response.status(Status.NOT_FOUND).entity("record not found").build();
-		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+		} catch (Exception exception) {
+			return handleException(exception);
 		}
-
 		return Response.ok(new GenericEntity<List<Jbar>>(jbars) {
 		}).build();
 	}
@@ -60,15 +55,13 @@ public class JbarResource {
 		try {
 			jbar = jbarDao.get(id);
 
-		} catch (NotFoundException e) {
-			return Response.status(Status.NOT_FOUND).entity("record not found").build();
-		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+		} catch (Exception exception) {
+			return handleException(exception);
 		}
 		return Response.ok(jbar).build();
-
 	}
 
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -78,14 +71,14 @@ public class JbarResource {
 
 		try {
 			jbarPersisted = jbarDao.save(jbar);
-		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+			
+		} catch (Exception exception) {
+			return handleException(exception);
 		}
-
 		return Response.ok(jbarPersisted).build();
-
 	}
 
+	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -95,25 +88,24 @@ public class JbarResource {
 
 		try {
 			jbarPersisted = jbarDao.save(jbar);
-		} catch (Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+			
+		} catch (Exception exception) {
+			return handleException(exception);
 		}
-
 		return Response.ok(jbarPersisted).build();
-
 	}
 
+	
 	@DELETE
 	@Path("/{id}")
 	public Response deleteJbar(final @PathParam("id") int id) {
 
 		try {
 			jbarDao.delete(id);
-		} catch (Exception e) {
-			throw new WebApplicationException(Response.Status.NOT_FOUND);
+			
+		} catch (Exception exception) {
+			return handleException(exception);
 		}
 		return Response.status(Status.GONE).build();
-
 	}
-
 }
