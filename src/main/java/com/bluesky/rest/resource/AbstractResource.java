@@ -24,6 +24,7 @@ public abstract class AbstractResource {
 
 	@Inject
 	Logger logger;
+	
 
 	/**
 	 * 
