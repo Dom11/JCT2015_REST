@@ -20,7 +20,6 @@ import com.bluesky.rest.data.dao.ProfileDao;
 import com.bluesky.rest.data.pdo.Profile;
 
 
-
 @Path("/profile")
 public class ProfileResource extends AbstractResource {
 

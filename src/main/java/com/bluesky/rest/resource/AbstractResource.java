@@ -14,15 +14,14 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 
 
+
 /**
  * common behavior for every REST resource class.
  *
- * @author Rob
- * @version $Revision$, $Date$
  */
 public abstract class AbstractResource {
 
-	@Inject
+//	@Inject
 	Logger logger;
 	
 
