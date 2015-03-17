@@ -15,8 +15,6 @@ import org.hibernate.ejb.EntityManagerImpl;
 /**
  * Generic data access object, implementing most common CRUD functionalities.
  * 
- * @author u24279
- *
  * @param <T> type to be generified.
  * @param <I> key type to be generified.
  */

@@ -16,31 +16,31 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.bluesky.rest.data.dao.JiraDao;
-import com.bluesky.rest.data.pdo.Jira;
+import com.bluesky.rest.data.dao.DomainDao;
+import com.bluesky.rest.data.pdo.Domain;
 
 
-@Path("/jira")
-public class JiraResource extends AbstractResource {
+@Path("/domain")
+public class DomainResource extends AbstractResource {
 
 	@Inject
-	JiraDao jiraDao;
+	DomainDao domainDao;
 	
-		
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/list")
-	public Response listAllJira() {
-		
-		List<Jira> jiras = null;
+	public Response listAllDomains() {
+
+		List<Domain> domains = null;
 
 		try {
-			jiras = jiraDao.findAll();
+			domains = domainDao.findAll();
 
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(new GenericEntity<List<Jira>>(jiras) {
+		return Response.ok(new GenericEntity<List<Domain>>(domains) {
 		}).build();
 	}
 
@@ -48,60 +48,60 @@ public class JiraResource extends AbstractResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response getJira(final @PathParam("id") int id) {
+	public Response getDomain(final @PathParam("id") int id) {
 
-		Jira jira = null;
+		Domain domain = null;
 
 		try {
-			jira = jiraDao.get(id);
+			domain = domainDao.get(id);
 
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(jira).build();
+		return Response.ok(domain).build();
 	}
 
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createJira(final Jira jira) {
+	public Response createDomain(final Domain domain) {
 
-		Jira jiraPersisted = null;
+		Domain domainPersisted = null;
 
 		try {
-			jiraPersisted = jiraDao.save(jira);
-			
+			domainPersisted = domainDao.save(domain);
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(jiraPersisted).build();
+		return Response.ok(domainPersisted).build();
 	}
 
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateJira(final Jira jira) {
+	public Response updateDomain(final Domain domain) {
 
-		Jira jiraPersisted = null;
+		Domain domainPersisted = null;
 
 		try {
-			jiraPersisted = jiraDao.save(jira);
+			domainPersisted = domainDao.save(domain);
 			
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(jiraPersisted).build();
+		return Response.ok(domainPersisted).build();
 	}
 
 	
 	@DELETE
 	@Path("/{id}")
-	public Response deleteJira(final @PathParam("id") int id) {
+	public Response deleteDomain(final @PathParam("id") int id) {
 
 		try {
-			jiraDao.delete(id);
+			domainDao.delete(id);
+			
 		} catch (Exception exception) {
 			return handleException(exception);
 		}

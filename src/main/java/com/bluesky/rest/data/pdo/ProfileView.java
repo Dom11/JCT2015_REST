@@ -1,6 +1,7 @@
 package com.bluesky.rest.data.pdo;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -10,8 +11,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="profileview")
-@NamedQuery(name="Profileview.findAll", query="SELECT p FROM Profileview p")
-public class Profileview implements Serializable {
+@NamedQuery(name="ProfileView.findAll", query="SELECT p FROM ProfileView p")
+public class ProfileView implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(nullable=false, length=5)
@@ -25,9 +26,12 @@ public class Profileview implements Serializable {
 
 	@Column(nullable=false, length=45)
 	private String jiraProjectKey;
-
+	
 	@Column(nullable=false, length=5)
 	private String prefixName;
+	
+	@Column(nullable=false, length=45)
+	private String domainName;
 	
 	@Id
 	@Column(name="profile_id", nullable=false)
@@ -44,9 +48,12 @@ public class Profileview implements Serializable {
 
 	@Column(length=17)
 	private String profileName;
+	
+	@Column(name="profileStatus")
+	private boolean profileStatus;
 
 	
-	public Profileview() {
+	public ProfileView() {
 	}
 
 	public String getEnvironmentName() {
@@ -72,6 +79,7 @@ public class Profileview implements Serializable {
 	public void setJbarName(String jbarName) {
 		this.jbarName = jbarName;
 	}
+	
 
 	public String getJiraProjectKey() {
 		return this.jiraProjectKey;
@@ -87,6 +95,14 @@ public class Profileview implements Serializable {
 
 	public void setPrefixName(String prefixName) {
 		this.prefixName = prefixName;
+	}
+	
+	public String getDomainName() {
+		return this.domainName;
+	}
+
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
 	}
 
 	public int getProfileId() {
@@ -127,5 +143,13 @@ public class Profileview implements Serializable {
 
 	public void setProfileName(String profileName) {
 		this.profileName = profileName;
+	}
+	
+	public boolean getProfileStatus() {
+		return this.profileStatus;
+	}
+
+	public void setProfileStatus(boolean profileStatus) {
+		this.profileStatus = profileStatus;
 	}
 }

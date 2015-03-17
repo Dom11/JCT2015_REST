@@ -16,31 +16,31 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.bluesky.rest.data.dao.JiraDao;
-import com.bluesky.rest.data.pdo.Jira;
+import com.bluesky.rest.data.dao.ProfileViewDao;
+import com.bluesky.rest.data.pdo.ProfileView;
 
 
-@Path("/jira")
-public class JiraResource extends AbstractResource {
+@Path("/profileView")
+public class ProfileViewResource extends AbstractResource {
 
 	@Inject
-	JiraDao jiraDao;
-	
+	ProfileViewDao profileViewDao;
+
 		
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/list")
-	public Response listAllJira() {
+	public Response listAllProfileviews() {
 		
-		List<Jira> jiras = null;
+		List<ProfileView> profileViews = null;
 
 		try {
-			jiras = jiraDao.findAll();
+			profileViews = profileViewDao.findAll();
 
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(new GenericEntity<List<Jira>>(jiras) {
+		return Response.ok(new GenericEntity<List<ProfileView>>(profileViews) {
 		}).build();
 	}
 
@@ -48,60 +48,60 @@ public class JiraResource extends AbstractResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response getJira(final @PathParam("id") int id) {
+	public Response getProfileview(final @PathParam("id") int id) {
 
-		Jira jira = null;
+		ProfileView profileView = null;
 
 		try {
-			jira = jiraDao.get(id);
+			profileView = profileViewDao.get(id);
 
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(jira).build();
+		return Response.ok(profileView).build();
 	}
 
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createJira(final Jira jira) {
+	public Response createProfileview(final ProfileView profileview) {
 
-		Jira jiraPersisted = null;
+		ProfileView profileviewPersisted = null;
 
 		try {
-			jiraPersisted = jiraDao.save(jira);
+			profileviewPersisted = profileViewDao.save(profileview);
 			
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(jiraPersisted).build();
+		return Response.ok(profileviewPersisted).build();
 	}
 
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateJira(final Jira jira) {
+	public Response updateProfileview(final ProfileView profileview) {
 
-		Jira jiraPersisted = null;
+		ProfileView profileviewPersisted = null;
 
 		try {
-			jiraPersisted = jiraDao.save(jira);
+			profileviewPersisted = profileViewDao.save(profileview);
 			
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(jiraPersisted).build();
+		return Response.ok(profileviewPersisted).build();
 	}
 
 	
 	@DELETE
 	@Path("/{id}")
-	public Response deleteJira(final @PathParam("id") int id) {
+	public Response deleteProfileview(final @PathParam("id") int id) {
 
 		try {
-			jiraDao.delete(id);
+			profileViewDao.delete(id);
 		} catch (Exception exception) {
 			return handleException(exception);
 		}

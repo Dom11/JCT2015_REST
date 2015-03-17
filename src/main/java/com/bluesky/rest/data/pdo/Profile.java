@@ -32,6 +32,9 @@ public class Profile implements Serializable {
 
 	@Column(name="prefix_id")
 	private int prefixId;
+	
+	@Column(name="domain_id")
+	private int domainId;
 
 	@Column(name="profileComponent")
 	private String profileComponent;
@@ -41,6 +44,9 @@ public class Profile implements Serializable {
 	
 	@Column(name="profileDnsName")
 	private String profileDnsName;
+	
+	@Column(name="profileStatus")
+	private boolean profileStatus;
 	
 	@Version
 	@Column(name="version")
@@ -97,6 +103,14 @@ public class Profile implements Serializable {
 	public void setPrefixId(int prefixId) {
 		this.prefixId = prefixId;
 	}
+	
+	public int getDomainId() {
+		return this.domainId;
+	}
+
+	public void setDomainId(int domainId) {
+		this.domainId = domainId;
+	}
 
 	public String getProfileComponent() {
 		return this.profileComponent;
@@ -120,6 +134,14 @@ public class Profile implements Serializable {
 
 	public void setProfileDnsName(String profileDnsName) {
 		this.profileDnsName = profileDnsName;
+	}
+	
+	public boolean getProfileStatus() {
+		return this.profileStatus;
+	}
+
+	public void setProfileStatus(boolean profileStatus) {
+		this.profileStatus = profileStatus;
 	}
 
 	public Integer getVersion() {
