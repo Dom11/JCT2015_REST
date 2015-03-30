@@ -2,7 +2,7 @@ package com.bluesky.rest.data.dao;
 
 import javax.ejb.Stateless;
 
-import com.bluesky.rest.data.pdo.Host;
+import com.bluesky.rest.data.pdo.JvmArgument;
 
 
 /**
@@ -11,14 +11,14 @@ import com.bluesky.rest.data.pdo.Host;
  * @author Dominik
  */
 @Stateless
-public class HostDao extends GenericDao<Host, Integer> {
+public class JvmArgumentDao extends GenericDao<JvmArgument, Integer> {
 
 	
 	/**
 	 * Constructor
 	 */
-	public HostDao() {
-		super(Host.class);
+	public JvmArgumentDao() {
+		super(JvmArgument.class);
 	}
 
 }

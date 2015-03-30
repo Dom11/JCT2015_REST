@@ -12,6 +12,7 @@
 		<class>com.bluesky.rest.data.pdo.Host</class>
 		<class>com.bluesky.rest.data.pdo.Jbar</class>
 		<class>com.bluesky.rest.data.pdo.Jira</class>
+		<class>com.bluesky.rest.data.pdo.JvmArgument</class>
 		<class>com.bluesky.rest.data.pdo.Prefix</class>
 		<class>com.bluesky.rest.data.pdo.Profile</class>
 		<class>com.bluesky.rest.data.pdo.ProfileView</class>

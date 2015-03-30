@@ -20,6 +20,12 @@ import com.bluesky.rest.data.dao.PrefixDao;
 import com.bluesky.rest.data.pdo.Prefix;
 
 
+/**
+ * Resource Class.
+ * Provides CRUD methods.
+ * 
+ * @author Dominik
+ */
 @Path("/prefix")
 public class PrefixResource extends AbstractResource {
 
@@ -108,4 +114,5 @@ public class PrefixResource extends AbstractResource {
 		}
 		return Response.status(Status.GONE).build();
 	}
+	
 }

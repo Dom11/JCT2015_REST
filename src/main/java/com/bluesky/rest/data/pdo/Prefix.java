@@ -8,10 +8,12 @@ import javax.persistence.*;
 /**
  * The persistent class for the prefix database table.
  * 
+ * @author Dominik
  */
 @Entity
 @Table(name="prefix")
 public class Prefix implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -26,30 +28,42 @@ public class Prefix implements Serializable {
 	private Integer version;
 	
 	
+	/**
+	 * Constructor
+	 */
 	public Prefix() {
 	}
+	
+	
+	// ---- Getter and Setter ----
 	
 	public int getPrefixId() {
 		return this.prefixId;
 	}
 
+	
 	public void setPrefixId(int prefixId) {
 		this.prefixId = prefixId;
 	}
 
+	
 	public String getPrefixName() {
 		return this.prefixName;
 	}
 
+	
 	public void setPrefixName(String prefixName) {
 		this.prefixName = prefixName;
 	}
 
+	
 	public Integer getVersion() {
 		return this.version;
 	}
 
+	
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
+	
 }

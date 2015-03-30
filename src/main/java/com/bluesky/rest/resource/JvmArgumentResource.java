@@ -16,8 +16,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.bluesky.rest.data.dao.HostDao;
-import com.bluesky.rest.data.pdo.Host;
+import com.bluesky.rest.data.dao.JvmArgumentDao;
+import com.bluesky.rest.data.pdo.JvmArgument;
 
 
 /**
@@ -26,27 +26,27 @@ import com.bluesky.rest.data.pdo.Host;
  * 
  * @author Dominik
  */
-@Path("/host")
-public class HostResource extends AbstractResource {
+@Path("/jvm")
+public class JvmArgumentResource extends AbstractResource {
 
 	@Inject
-	HostDao hostDao;
-
+	JvmArgumentDao jvmArgumentDao;
 	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/list")
-	public Response listAllHosts() {
+	public Response listAllJvmArguments() {
 
-		List<Host> hosts = null;
+		List<JvmArgument> jvms = null;
 
 		try {
-			hosts = hostDao.findAll();
-			
+			jvms = jvmArgumentDao.findAll();
+
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(new GenericEntity<List<Host>>(hosts) {
+		return Response.ok(new GenericEntity<List<JvmArgument>>(jvms) {
 		}).build();
 	}
 
@@ -54,60 +54,59 @@ public class HostResource extends AbstractResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response getHost(final @PathParam("id") int id) {
+	public Response getJvmArgument(final @PathParam("id") int id) {
 
-		Host host = null;
+		JvmArgument jvmArgument = null;
 
 		try {
-			host = hostDao.get(id);
+			jvmArgument = jvmArgumentDao.get(id);
 
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(host).build();
+		return Response.ok(jvmArgument).build();
 	}
 
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createHost(final Host host) {
+	public Response createJvmArgument(final JvmArgument jvmArgument) {
 
-		Host hostPersisted = null;
+		JvmArgument jvmArgumentPersisted = null;
 
 		try {
-			hostPersisted = hostDao.save(host);
-			
+			jvmArgumentPersisted = jvmArgumentDao.save(jvmArgument);
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(hostPersisted).build();
+		return Response.ok(jvmArgumentPersisted).build();
 	}
 
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateHost(final Host host) {
+	public Response updateJvmArgument(final JvmArgument jvmArgument) {
 
-		Host hostPersisted = null;
+		JvmArgument jvmArgumentPersisted = null;
 
 		try {
-			hostPersisted = hostDao.save(host);
+			jvmArgumentPersisted = jvmArgumentDao.save(jvmArgument);
 			
 		} catch (Exception exception) {
 			return handleException(exception);
 		}
-		return Response.ok(hostPersisted).build();
+		return Response.ok(jvmArgumentPersisted).build();
 	}
 
 	
 	@DELETE
 	@Path("/{id}")
-	public Response deleteHost(final @PathParam("id") int id) {
+	public Response deleteJvmArgument(final @PathParam("id") int id) {
 
 		try {
-			hostDao.delete(id);
+			jvmArgumentDao.delete(id);
 			
 		} catch (Exception exception) {
 			return handleException(exception);
