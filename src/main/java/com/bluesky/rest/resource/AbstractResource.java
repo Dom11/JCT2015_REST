@@ -1,6 +1,5 @@
 package com.bluesky.rest.resource;
 
-import javax.inject.Inject;
 import javax.persistence.EntityExistsException;
 import javax.persistence.LockTimeoutException;
 import javax.persistence.NoResultException;
@@ -14,19 +13,17 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 
 
-
 /**
  * common behavior for every REST resource class.
  *
+ * @author Dominik
  */
 public abstract class AbstractResource {
 
-//	@Inject
 	Logger logger;
 	
 
 	/**
-	 * 
 	 * Called whenever a EJB Exception is raised upon a EJB transaction boundary.
 	 * The chained root cause exception will be translated to a proper HTTP status code and REST response object.
 	 * 
@@ -67,4 +64,5 @@ public abstract class AbstractResource {
 		logger.error(exception.getMessage());
 		return Response.status(Status.INTERNAL_SERVER_ERROR).entity(exception.getCause().getMessage()).build();
 	}
+	
 }

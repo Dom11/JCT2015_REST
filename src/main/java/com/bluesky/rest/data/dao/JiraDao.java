@@ -6,19 +6,19 @@ import com.bluesky.rest.data.pdo.Jira;
 
 
 /**
- * Database Driver data access object.
+ * Database Driver data access object (dao).
  * 
+ * @author Dominik
  */
 @Stateless
 public class JiraDao extends GenericDao<Jira, Integer> {
 
-	// ---- Fields
-
-	// ---- Constructors
+	
+	/**
+	 * Constructor
+	 */
 	public JiraDao() {
 		super(Jira.class);
 	}
-	
-	// ---- Methods
 
 }

@@ -3,6 +3,7 @@ package com.bluesky.rest.resource;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
+
 /**
  * End point from a client perspective
  * Root of the server side tree
@@ -12,4 +13,5 @@ public class RestEndpoint extends Application {
 
 	public RestEndpoint() {
 	}
+	
 }

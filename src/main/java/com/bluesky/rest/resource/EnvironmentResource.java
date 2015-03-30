@@ -20,6 +20,12 @@ import com.bluesky.rest.data.dao.EnvironmentDao;
 import com.bluesky.rest.data.pdo.Environment;
 
 
+/**
+ * Resource Class.
+ * Provides CRUD methods.
+ * 
+ * @author Dominik
+ */
 @Path("/environment")
 public class EnvironmentResource extends AbstractResource {
 
@@ -108,4 +114,5 @@ public class EnvironmentResource extends AbstractResource {
 		}
 		return Response.status(Status.GONE).build();
 	}
+	
 }

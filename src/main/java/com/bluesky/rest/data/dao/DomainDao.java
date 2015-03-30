@@ -6,19 +6,19 @@ import com.bluesky.rest.data.pdo.Domain;
 
 
 /**
- * Database Driver data access object.
+ * Database Driver data access object (dao).
  * 
+ * @author Dominik
  */
 @Stateless
 public class DomainDao extends GenericDao<Domain, Integer> {
 
-	// ---- Fields
-
-	// ---- Constructors
+	
+	/**
+	 * Constructor
+	 */
 	public DomainDao() {
 		super(Domain.class);
 	}
-	
-	// ---- Methods
 
 }

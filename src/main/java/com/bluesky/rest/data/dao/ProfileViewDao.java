@@ -6,19 +6,19 @@ import com.bluesky.rest.data.pdo.ProfileView;
 
 
 /**
- * Database Driver data access object.
+ * Database Driver data access object (dao).
  * 
+ * @author Dominik
  */
 @Stateless
 public class ProfileViewDao extends GenericDao<ProfileView,Integer> {
 
-	// ---- Fields
-
-	// ---- Constructors
+	
+	/**
+	 * Constructor
+	 */
 	public ProfileViewDao() {
 		super(ProfileView.class);
 	}
-
-	// ---- Methods
 	
 }

@@ -20,6 +20,12 @@ import com.bluesky.rest.data.dao.DomainDao;
 import com.bluesky.rest.data.pdo.Domain;
 
 
+/**
+ * Resource Class.
+ * Provides CRUD methods.
+ * 
+ * @author Dominik
+ */
 @Path("/domain")
 public class DomainResource extends AbstractResource {
 
@@ -107,4 +113,5 @@ public class DomainResource extends AbstractResource {
 		}
 		return Response.status(Status.GONE).build();
 	}
+	
 }

@@ -6,22 +6,22 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the domain database table.
+ * The persistent class for the jvmArgument database table.
  * 
  * @author Dominik
  */
 @Entity
-@Table(name="domain")
-public class Domain implements Serializable {
+@Table(name="jvmArgument")
+public class JvmArgument implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="domain_id")
-	private int domainId;
+	@Column(name="jvm_id")
+	private int jvmId;
 
-	@Column(name="domainName")
-	private String domainName;
+	@Column(name="jvmArgument")
+	private String jvmArgument;
 	
 	@Version
 	@Column(name="version")
@@ -31,24 +31,24 @@ public class Domain implements Serializable {
 	/**
 	 * Constructor
 	 */
-	public Domain() {
+	public JvmArgument() {
 	}
 
 	
 	// ---- Getter and Setter ----
 	
-	public int getDomainId() {
-		return this.domainId;
+	public int getJvmId() {
+		return this.jvmId;
 	}
 
 	
-	public String getDomainName() {
-		return this.domainName;
+	public String getJvmArgument() {
+		return this.jvmArgument;
 	}
 
 	
-	public void setDomainName(String domainName) {
-		this.domainName = domainName;
+	public void setJvmArgument(String jvmArgument) {
+		this.jvmArgument = jvmArgument;
 	}
 
 	

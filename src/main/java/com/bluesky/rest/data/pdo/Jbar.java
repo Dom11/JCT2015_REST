@@ -8,10 +8,12 @@ import javax.persistence.*;
 /**
  * The persistent class for the jbar database table.
  * 
+ * @author Dominik
  */
 @Entity
 @Table(name="jbar")
 public class Jbar implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -26,30 +28,42 @@ public class Jbar implements Serializable {
 	private Integer version;
 
 	
+	/**
+	 * Constructor
+	 */
 	public Jbar() {
 	}
+	
+	
+	// ---- Getter and Setter ----
 	
 	public int getJbarId() {
 		return this.jbarId;
 	}
 
+	
 	public void setJbarId(int jbarId) {
 		this.jbarId = jbarId;
 	}
 
+	
 	public String getJbarName() {
 		return this.jbarName;
 	}
 
+	
 	public void setJbarName(String jbarName) {
 		this.jbarName = jbarName;
 	}
 
+	
 	public Integer getVersion() {
 		return this.version;
 	}
 
+	
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
+	
 }

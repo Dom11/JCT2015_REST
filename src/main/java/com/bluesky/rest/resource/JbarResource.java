@@ -20,6 +20,12 @@ import com.bluesky.rest.data.dao.JbarDao;
 import com.bluesky.rest.data.pdo.Jbar;
 
 
+/**
+ * Resource Class.
+ * Provides CRUD methods.
+ * 
+ * @author Dominik
+ */
 @Path("/jbar")
 public class JbarResource extends AbstractResource {
 
@@ -108,4 +114,5 @@ public class JbarResource extends AbstractResource {
 		}
 		return Response.status(Status.GONE).build();
 	}
+	
 }

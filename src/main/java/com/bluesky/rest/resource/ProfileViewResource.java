@@ -20,6 +20,12 @@ import com.bluesky.rest.data.dao.ProfileViewDao;
 import com.bluesky.rest.data.pdo.ProfileView;
 
 
+/**
+ * Resource Class.
+ * Provides CRUD methods.
+ * 
+ * @author Dominik
+ */
 @Path("/profileView")
 public class ProfileViewResource extends AbstractResource {
 
@@ -107,4 +113,5 @@ public class ProfileViewResource extends AbstractResource {
 		}
 		return Response.status(Status.GONE).build();
 	}
+	
 }

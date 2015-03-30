@@ -20,6 +20,12 @@ import com.bluesky.rest.data.dao.JiraDao;
 import com.bluesky.rest.data.pdo.Jira;
 
 
+/**
+ * Resource Class.
+ * Provides CRUD methods.
+ * 
+ * @author Dominik
+ */
 @Path("/jira")
 public class JiraResource extends AbstractResource {
 
@@ -107,4 +113,5 @@ public class JiraResource extends AbstractResource {
 		}
 		return Response.status(Status.GONE).build();
 	}
+	
 }
