@@ -13,7 +13,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="profileview")
-@NamedQuery(name="profileView.findAll", query="SELECT p FROM profileView p")
+@NamedQuery(name="ProfileView.findAll", query="SELECT p FROM ProfileView p")
 public class ProfileView implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
